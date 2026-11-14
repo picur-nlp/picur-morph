@@ -1,0 +1,21 @@
+[package]
+name = "picur-morph-rank"
+description = "Document-level quality scoring of Hungarian text"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+picur-morph-spell.workspace = true
+picur-morph-ortho.workspace = true
+picur-morph-repair.workspace = true
+
+[lints]
+workspace = true

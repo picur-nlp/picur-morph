@@ -1,0 +1,845 @@
+// Curated supplement, hand-written from the rulebook. Not generated.
+//
+// morphdb has no entry at all for the sz-d(-v) verbs of `VRB-STEM-012`, which the induced list
+// `local/lists/sz-d-verbs.tsv` confirms independently (`morphdb=-`, corpus 284,155 : 2 for
+// `alszik`). They are a closed class, so they are stated here with the `d` stem the rulebook
+// itself lists, because nothing derives `alud-` from `alsz-`: `alud-` and `nyugod-` are both back
+// yet take different vowels.
+//
+// A supplement row REPLACES the converted entry for the same lemma and part of speech, so it is
+// also where a lexical property the rulebook states but the conversion did not carry is stated.
+//
+// Rules: VRB-STEM-012, VRB-PAST-006
+[
+    // `lat` is the single exception to VRB-PAST-006: every other t-final stem that is not a
+    // polysyllabic short-vowel one takes `-Ott-` before a person suffix, but this one takes `-t-`
+    // (`lattam`, not `*latottam`). One item, so it is stated rather than ruled.
+    (lemma:"lát",pos:Verb,traits:[Transitive,PastNonfinalT]),
+
+    // Function words. morphdb keeps these in `art.lexicon`, `conj.lexicon`, `det.lexicon` and
+    // `pronoun.lexicon`, none of which the converter reads, so the most frequent words in any
+    // Hungarian text were absent and a checker flagged every `a` and `az`. They are closed classes
+    // the rulebook enumerates, so they are stated rather than induced.
+    //
+    // The articles are the only true determiners left here: they never inflect. Everything else in
+    // the quantifier series does (`annyit`, `mennyit`, `néhányat`), so it is pronominal.
+    //
+    // Conjunctions are no longer listed here: `conj.lexicon` is read now and supplies them.
+    //
+    // Rules: PND-ART-001 (a ~ az), PND-ART-009 (egy), PND-PERS-001 (personal), PND-DEM-001.
+    (lemma:"a",pos:Determiner,traits:[Article]),
+    (lemma:"az",pos:Determiner,traits:[Article,Back]),
+    // `az` is also the distal demonstrative pronoun, which unlike the article inflects: `azt`,
+    // `abban`, `azok`. PND-DEM-001.
+    (lemma:"az",pos:Pronoun,traits:[Back,DemonstrativeZ]),
+    // PND-DEM-007's internal determiners. `e`, `ez`, `a` and `az` are entries already, and
+    // `ezen`/`azon` fall out as the superessive of the pronoun, so only the `-me`/`-ma` pair is
+    // left: they do not inflect, and the reinforcer occurs nowhere else in the language.
+    (lemma:"eme",pos:Determiner),
+    (lemma:"ama",pos:Determiner,traits:[Back]),
+    (lemma:"én",pos:Pronoun),
+    (lemma:"te",pos:Pronoun),
+    (lemma:"ő",pos:Pronoun),
+    (lemma:"mi",pos:Pronoun),
+    (lemma:"ti",pos:Pronoun),
+    (lemma:"ők",pos:Pronoun),
+    // PND-DEM-002: the final `z` assimilates to a consonant-initial suffix, which is a property of
+    // these stems and of nothing else in the language.
+    (lemma:"ez",pos:Pronoun,traits:[DemonstrativeZ]),
+    (lemma:"emez",pos:Pronoun,traits:[DemonstrativeZ]),
+    (lemma:"amaz",pos:Pronoun,traits:[Back,DemonstrativeZ]),
+    (lemma:"ugyanez",pos:Pronoun,traits:[DemonstrativeZ]),
+    (lemma:"ugyanaz",pos:Pronoun,traits:[Back,DemonstrativeZ]),
+    (lemma:"mindez",pos:Pronoun,traits:[DemonstrativeZ]),
+    (lemma:"mindaz",pos:Pronoun,traits:[Back,DemonstrativeZ]),
+
+    // The reflexive. PND-REFL-001 gives it the stem `mag-` with possessive personal suffixes and a
+    // back, lowering linking vowel, and PND-REFL-002 says the cases then attach regularly. That is
+    // the whole paradigm: `magam`, `magát`, `magunkkal` and the rest fall out of the ordinary
+    // possessive and case machinery, so only the stem is stated. It is a separate lexeme from the
+    // noun `mag` 'seed', which is a v-stem taking `magja` and `magvom`.
+    //
+    // PND-REFL-003 forms the emphatic compounds with the same stem.
+    //
+    // Rules: PND-REFL-001, PND-REFL-002, PND-REFL-003
+    (lemma:"mag",pos:Pronoun,traits:[Back,Low]),
+    (lemma:"önmag",pos:Pronoun,traits:[Back,Low]),
+    (lemma:"önnönmag",pos:Pronoun,traits:[Back,Low]),
+    (lemma:"egymag",pos:Pronoun,traits:[Back,Low]),
+    // PND-DEM-002 exceptions: historical formations that the z-assimilation does not derive.
+    (lemma:"eddig",pos:Adverb),
+    (lemma:"addig",pos:Adverb),
+    // The literary 3sg of `elé`, a lative written onto the postposition, which PND-PERS-004
+    // (zero or `-je` after `é`) does not derive.
+    (lemma:"elébe",pos:Postposition),
+    // NOM-PL: a nominalised adjective with a noun sense of its own is non-lowering in that sense.
+    // NOM-ACC-009: the `ns` cluster takes the bare `-t` lexically (`protestánst` 341 :
+    // `protestánsot` 1 [WC2]).
+    (lemma:"protestáns",pos:Noun,traits:[BareAccusative]),
+    // DER-NOUN-014: the `-(O)s` person noun is P-dom, so it is listed; non-lowering, unlike the
+    // adjective it converts (`deszantost` 30, `légideszantost` 4, `deszantosat` 0 [WC2]).
+    (lemma:"deszantos",pos:Noun),
+    // NOM-ACC-009: `nonszenszt` 69 : `nonszenszot` 0 [WC2].
+    (lemma:"nonszensz",pos:Noun,traits:[BareAccusative]),
+    // ORT-TOG-026: the two preverbs that stand in front of a prefixed verb.
+    (lemma:"újra",pos:Preverb,traits:[Stacking]),
+    (lemma:"tovább",pos:Preverb,traits:[Stacking]),
+    (lemma:"ekképpen",pos:Adverb),
+    (lemma:"akképpen",pos:Adverb),
+    (lemma:"ki",pos:Pronoun),
+    // `mely` ends in a coronal sonorant, so the computed accusative is the bare `*melyt`; the
+    // attested form is `melyet`. NOM-ACC-006.
+    (lemma:"mely",pos:Pronoun,traits:[LinkedAccusative]),
+    (lemma:"melyik",pos:Pronoun),
+    // The relative series is `a-` plus an interrogative, and DER-COMP-008 makes the suffix follow
+    // the last member: `aki` gives `akinek`, not `*akinak`, although its first vowel is back. The
+    // seam offset is what carries that, so no harmony trait is needed.
+    (lemma:"aki",parts:[1],pos:Pronoun),
+    (lemma:"ami",parts:[1],pos:Pronoun),
+    (lemma:"amely",parts:[1],pos:Pronoun,traits:[LinkedAccusative]),
+    (lemma:"amelyik",parts:[1],pos:Pronoun),
+    (lemma:"amennyi",parts:[1],pos:Pronoun),
+    (lemma:"ahány",parts:[1],pos:Pronoun),
+    (lemma:"annyi",pos:Pronoun,traits:[SingularOnly]),
+    (lemma:"ennyi",pos:Pronoun,traits:[SingularOnly]),
+    (lemma:"maga",pos:Pronoun),
+    (lemma:"ön",pos:Pronoun),
+
+    // NOM-STEM-010 corrections. The conversion gave `só`, `nő` and `fő` v-stem traits, but the rule
+    // names them explicitly as non-v-stems of the same shape (`sók`, `nők`, `fők`, `főt`), and the
+    // corpus agrees: `sót` 121,591 : `savat` 7,585, where `savat` belongs to the separate lemma
+    // `sav`. Without this, `sót` and `sók` were rejected outright.
+    (lemma:"só",pos:Noun,traits:[Low]),
+    (lemma:"nő",pos:Noun,traits:[Low]),
+    (lemma:"fő",pos:Noun,traits:[Low]),
+    // The stated exceptions of NOM-STEM-010: these alternate in the plural but keep the free stem
+    // in the accusative and superessive (`szót`, `szón`, but `szavak`).
+    (lemma:"szó",pos:Noun,traits:[Low,VStem,OaStem,FreeStemAccSup]),
+    // `jó` in that rule is the noun 'asset', not the adjective. The corpus keeps them apart and
+    // has no v-stem form of the adjective at all: `jót` 520,066 and `jók` 259,323 on lemma `jó`
+    // tagged Adj, while `javak` 115,050 and `javakat` 22,931 are tagged on a lemma `javak` of
+    // their own. Giving the adjective the v-stem traits made `jók` a rejected word.
+    (lemma:"jó",pos:Adjective,traits:[Low]),
+    // PH-VSTEM-002 is explicit that `szú` is *not* a v-stem: `szuvak` is rejected and `szúk` has
+    // 510 hits. Only the lexicalised adjective `szuvas` survives.
+    (lemma:"szú",pos:Noun,traits:[Low]),
+
+    // The words four of the abbreviations below share their letters with, restated from the
+    // conversion because an abbreviation row replaces the converted row of its lemma: `máj`
+    // 'liver' (`májat` 22,656, `májak` 261 : `májok` 4 [WC2], NOM-LOW-008), `dag` 'swelling',
+    // `prof` and `áll` 'chin'.
+    (lemma:"máj",pos:Noun,traits:[Low]),
+    (lemma:"dag",pos:Noun,traits:[AlternationOptional]),
+    (lemma:"prof",pos:Noun,traits:[PossessiveJa]),
+    (lemma:"áll",pos:Noun,traits:[Low,PossessiveA]),
+
+    // Unit symbols of ORT-ABBR-006 and the common lowercase acronyms, which take a suffix after a
+    // hyphen exactly as the ORT-ABBR-019 abbreviations do (`kg-nak`, `tbc-s`).
+    //
+    // Rules: ORT-ABBR-006, ORT-ABBR-009, ORT-ABBR-014
+    (lemma:"cm",pos:Noun,traits:[Abbreviation]),
+    (lemma:"m",pos:Noun,traits:[Abbreviation]),
+    (lemma:"km",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dl",pos:Noun,traits:[Abbreviation]),
+    (lemma:"l",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dkg",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dag",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kg",pos:Noun,traits:[Abbreviation]),
+    (lemma:"mg",pos:Noun,traits:[Abbreviation]),
+    (lemma:"g",pos:Noun,traits:[Abbreviation]),
+    (lemma:"min",pos:Noun,traits:[Abbreviation]),
+    (lemma:"s",pos:Noun,traits:[Abbreviation]),
+    (lemma:"h",pos:Noun,traits:[Abbreviation]),
+    (lemma:"W",pos:Noun,traits:[Abbreviation]),
+    (lemma:"V",pos:Noun,traits:[Abbreviation]),
+    (lemma:"A",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Hz",pos:Noun,traits:[Abbreviation]),
+    (lemma:"GHz",pos:Noun,traits:[Abbreviation]),
+    (lemma:"MHz",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kB",pos:Noun,traits:[Abbreviation]),
+    (lemma:"MB",pos:Noun,traits:[Abbreviation]),
+    (lemma:"GB",pos:Noun,traits:[Abbreviation]),
+    (lemma:"TB",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kWh",pos:Noun,traits:[Abbreviation]),
+    (lemma:"db",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ha",pos:Noun,traits:[Abbreviation]),
+    (lemma:"t",pos:Noun,traits:[Abbreviation]),
+    (lemma:"mol",pos:Noun,traits:[Abbreviation]),
+    (lemma:"cd",pos:Noun,traits:[Abbreviation]),
+    (lemma:"K",pos:Noun,traits:[Abbreviation]),
+    (lemma:"N",pos:Noun,traits:[Abbreviation]),
+    (lemma:"J",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Pa",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Ω",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tbc",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dvd",pos:Noun,traits:[Abbreviation]),
+    (lemma:"sms",pos:Noun,traits:[Abbreviation]),
+    (lemma:"pc",pos:Noun,traits:[Abbreviation]),
+    (lemma:"wc",pos:Noun,traits:[Abbreviation]),
+    (lemma:"km²",pos:Noun,traits:[Abbreviation]),
+    (lemma:"m²",pos:Noun,traits:[Abbreviation]),
+
+    // The standard abbreviation list of ORT-ABBR-019, extracted from the rule's own Output field.
+    // A period normally follows, and the tokeniser strips it, so the bare form is what a checker
+    // sees. Multi-word entries (`a. m.`, `Kr. e.`) are omitted: they are not single tokens.
+    //
+    // Rules: ORT-ABBR-019, ORT-ABBR-004
+    (lemma:"Bp",pos:Noun,traits:[Abbreviation]),
+    (lemma:"D",pos:Noun,traits:[Abbreviation]),
+    (lemma:"DK",pos:Noun,traits:[Abbreviation]),
+    (lemma:"DNy",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Ft",pos:Noun,traits:[Abbreviation]),
+    (lemma:"NB",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Ny",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Pf",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Szt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"Ui",pos:Noun,traits:[Abbreviation]),
+    (lemma:"aug",pos:Noun,traits:[Abbreviation]),
+    (lemma:"bek",pos:Noun,traits:[Abbreviation]),
+    (lemma:"br",pos:Noun,traits:[Abbreviation]),
+    (lemma:"bt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"c",pos:Noun,traits:[Abbreviation]),
+    (lemma:"csüt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"de",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dec",pos:Noun,traits:[Abbreviation]),
+    (lemma:"dr",pos:Noun,traits:[Abbreviation]),
+    (lemma:"du",pos:Noun,traits:[Abbreviation]),
+    (lemma:"em",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ev",pos:Noun,traits:[Abbreviation]),
+    (lemma:"eü",pos:Noun,traits:[Abbreviation]),
+    (lemma:"febr",pos:Noun,traits:[Abbreviation]),
+    (lemma:"felv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ffi",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ford",pos:Noun,traits:[Abbreviation]),
+    (lemma:"fszla",pos:Noun,traits:[Abbreviation]),
+    (lemma:"fszt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"gimn",pos:Noun,traits:[Abbreviation]),
+    (lemma:"gk",pos:Noun,traits:[Abbreviation]),
+    (lemma:"gr",pos:Noun,traits:[Abbreviation]),
+    (lemma:"hg",pos:Noun,traits:[Abbreviation]),
+    (lemma:"honv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"id",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ifj",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ig",pos:Noun,traits:[Abbreviation]),
+    (lemma:"igh",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ill",pos:Noun,traits:[Abbreviation]),
+    (lemma:"isk",pos:Noun,traits:[Abbreviation]),
+    (lemma:"jan",pos:Noun,traits:[Abbreviation]),
+    (lemma:"júl",pos:Noun,traits:[Abbreviation]),
+    (lemma:"jún",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kb",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ker",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kft",pos:Noun,traits:[Abbreviation]),
+    (lemma:"kkt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"krt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"köv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"max",pos:Noun,traits:[Abbreviation]),
+    (lemma:"mb",pos:Noun,traits:[Abbreviation]),
+    (lemma:"mfszt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"máj",pos:Noun,traits:[Abbreviation]),
+    (lemma:"márc",pos:Noun,traits:[Abbreviation]),
+    (lemma:"nov",pos:Noun,traits:[Abbreviation]),
+    (lemma:"nyrt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"okl",pos:Noun,traits:[Abbreviation]),
+    (lemma:"okt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"olv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ov",pos:Noun,traits:[Abbreviation]),
+    (lemma:"pl",pos:Noun,traits:[Abbreviation]),
+    (lemma:"prof",pos:Noun,traits:[Abbreviation]),
+    (lemma:"pu",pos:Noun,traits:[Abbreviation]),
+    (lemma:"pü",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ref",pos:Noun,traits:[Abbreviation]),
+    (lemma:"rt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"rtg",pos:Noun,traits:[Abbreviation]),
+    (lemma:"stb",pos:Noun,traits:[Abbreviation]),
+    (lemma:"sz",pos:Noun,traits:[Abbreviation]),
+    (lemma:"szept",pos:Noun,traits:[Abbreviation]),
+    (lemma:"szerk",pos:Noun,traits:[Abbreviation]),
+    (lemma:"szla",pos:Noun,traits:[Abbreviation]),
+    (lemma:"szül",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tc",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tel",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ti",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tkp",pos:Noun,traits:[Abbreviation]),
+    (lemma:"tvr",pos:Noun,traits:[Abbreviation]),
+    (lemma:"u",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ua",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ui",pos:Noun,traits:[Abbreviation]),
+    (lemma:"uo",pos:Noun,traits:[Abbreviation]),
+    (lemma:"uő",pos:Noun,traits:[Abbreviation]),
+    (lemma:"v",pos:Noun,traits:[Abbreviation]),
+    (lemma:"vki",pos:Noun,traits:[Abbreviation]),
+    (lemma:"vmi",pos:Noun,traits:[Abbreviation]),
+    (lemma:"vsz",pos:Noun,traits:[Abbreviation]),
+    (lemma:"vö",pos:Noun,traits:[Abbreviation]),
+    (lemma:"zrt",pos:Noun,traits:[Abbreviation]),
+    (lemma:"É",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ÉK",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ÉNy",pos:Noun,traits:[Abbreviation]),
+    (lemma:"áll",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ált",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ápr",pos:Noun,traits:[Abbreviation]),
+    (lemma:"évf",pos:Noun,traits:[Abbreviation]),
+    (lemma:"özv",pos:Noun,traits:[Abbreviation]),
+    (lemma:"úm",pos:Noun,traits:[Abbreviation]),
+    (lemma:"ún",pos:Noun,traits:[Abbreviation]),
+    (lemma:"üi",pos:Noun,traits:[Abbreviation]),
+
+    // NOM-PL-003 names `férfi` as the noun that takes a low linking vowel before the plural
+    // although it ends in a vowel: `férfiak` 633,484 against `férfik` 285 [WC2].
+    (lemma:"férfi",pos:Noun,traits:[Back,Low,BareAccusative,LinkedPlural,HarmonyOptional]),
+
+    // The `ajtó` type is measured, not listed: `NOM-STEM-013` is a possessive-only alternation,
+    // so `cargo xtask morphdb` emits the two candidate possessives per `ó`/`ő` noun and
+    // `measure_possessive_alt.py` asks the corpus which one the language uses. 131 lemmas take it,
+    // 2,854 do not and 30 take both. The class was listed here until the measurement existed, and
+    // the corpus contradicts one of the rulebook's own members: `szőlője` 2,828 : `szőleje` 445.
+    //
+    // `első` is the one member the measurement cannot see. It is an ordinal, so the corpus files
+    // its forms under the lemma `egy` with a numeral tag rather than under `első`, and the
+    // lemma filter that keeps homographs from voting excludes them: `elseje` is 23,762 and
+    // `elsején` 65,916 against `elsője` 409 [WC2], all tagged `egy`/Num.
+    (lemma:"első",pos:Noun,traits:[PossessiveAlt,PossessiveA]),
+    (lemma:"tüdő",pos:Noun,traits:[PossessiveAlt,PossessiveA]),
+    (lemma:"velő",pos:Noun,traits:[PossessiveAlt,PossessiveA]),
+    (lemma:"vő",pos:Noun,traits:[PossessiveAlt,PossessiveA]),
+    (lemma:"hadfi",pos:Noun,traits:[Low,LinkedPlural]),
+
+    // Back-harmony loans ending in a neutral vowel. Their spelling computes as front, and morphdb
+    // carries no flag either way, so without these the dative came out front: `havernek` instead of
+    // `havernak`. Membership and the ratios are from the induced list
+    // `local/lists/neutral-final-loan-harmony.tsv`, which found 8 members among 163 candidates; the
+    // comment on each row is its dative count, back against front.
+    //
+    // Rules: PH-HARM-011
+    // A supplement row replaces the converted one, so each carries that row's accusative and
+    // possessive too; `haver` takes `PossessiveJa` against the conversion's `PossessiveA`
+    // (`haverja` 10,264 : `havera` 5 [WC2]).
+    (lemma:"haver",pos:Noun,traits:[Back,BareAccusative,PossessiveJa]),  // 71,848 : 634
+    (lemma:"matek",pos:Noun,traits:[Back,LinkedAccusative,PossessiveJa,HarmonyOptional]),  // 18,299 : 276
+    (lemma:"fater",pos:Noun,traits:[Back,BareAccusative,PossessiveJa,HarmonyOptional]),  // 5,385 : 190
+    (lemma:"balek",pos:Noun,traits:[Back,LinkedAccusative,PossessiveJa,HarmonyOptional]),  // 5,215 : 225
+    (lemma:"kolesz",pos:Noun,traits:[Back,BareAccusative,PossessiveA,HarmonyOptional]),  // 2,920 : 320
+    (lemma:"maszek",pos:Noun,traits:[Back,LinkedAccusative,PossessiveJa,HarmonyOptional]),  // 2,084 : 80
+    (lemma:"krapek",pos:Noun,traits:[Back,LinkedAccusative,PossessiveJa,HarmonyOptional]),  // 436 : 39
+    (lemma:"pajesz",pos:Noun,traits:[Back,BareAccusative,PossessiveA,HarmonyOptional]),  // 271 : 14
+
+    // Interrogative, relative and universal quantifiers. Another closed class from `det.lexicon`
+    // and `pronoun.lexicon`, neither of which the converter reads. `mennyi` was rejected outright.
+    //
+    // Rules: PND-QUANT, PND-DEM-001
+    (lemma:"mennyi",pos:Pronoun,traits:[SingularOnly]),
+    (lemma:"ahány",pos:Determiner),
+    (lemma:"amennyi",pos:Determiner),
+    (lemma:"semennyi",pos:Pronoun),
+    (lemma:"bármennyi",pos:Pronoun),
+    (lemma:"akármennyi",pos:Pronoun),
+    // The `vala-`, `bár-` and `akár-` compounds of `ki` and `mi`. Their spelling computes back
+    // harmony from the `a`/`á` of the prefix, but the pronoun they are built on governs and they
+    // take front suffixes throughout: `valakinek` 413,614 against `valakinak` 213, `bárkinek`
+    // 82,552 against `bárkinak` 10, `akárminek` 1,800 against `akárminak` 0 [WC2]. The same series
+    // whose spelling already computes front (`senki`, `semmi`, `mindenki`) needs no mark.
+    //
+    // `másik` is not one of them and is genuinely back (`másiknak` 73,822 : `másiknek` 9).
+    //
+    // Rules: PH-HARM-011
+    // Missing from the conversion altogether.
+    (lemma:"valamelyik",pos:Pronoun),
+    (lemma:"némi",pos:Determiner),
+
+    (lemma:"mindenki",pos:Pronoun),
+    (lemma:"akármelyik",pos:Pronoun),
+    (lemma:"mindenféle",pos:Adjective),
+    // PND-INT-001's inventory, which morphdb does not have at all. Each missing one takes its
+    // whole prefixed series with it (`valahová`, `bárhová`, `ameddig`, `valamiféle`), because
+    // PND-INDF-001 builds the series on these bases. `hova` is the variant and is an entry
+    // already; `hová` is the standard spelling.
+    (lemma:"hová",pos:Adverb,traits:[Back]),
+    // `hány` is in morphdb as a noun and a verb ('vomit'), never as the interrogative quantity
+    // word PND-INT-001 lists, so its collective `hányan` had no category to attach to. `mennyi`
+    // and `melyik` are pronouns here already.
+    (lemma:"hány",pos:Pronoun,traits:[Back,Low]),
+    (lemma:"meddig",pos:Adverb),
+    (lemma:"miféle",pos:Adjective),
+    (lemma:"bármiféle",pos:Adjective),
+    (lemma:"semmiféle",pos:Adjective),
+
+    // Quantifiers, determiner-like adjectives and reciprocals. Closed classes that morphdb keeps in
+    // `det.lexicon` and `pronoun.lexicon`, neither of which the converter reads. Measured as a
+    // leading cause of false rejection on normative text.
+    //
+    // Rules: PND-INDF-004, PND-DEM-001, PND-PERS-001
+    // `sok`, `kevés` and `több` grade and inflect like adjectives (`kevesebbet`, `sokkal`), so they
+    // are typed as adjectives rather than determiners; `Quantity` is what lets the collective and
+    // the multiplicative reach them and no other adjective (`sokan`, `kevésszer`, `rengetegszer`).
+    (lemma:"több",pos:Adjective,traits:[Quantity]),
+    (lemma:"sok",pos:Adjective,traits:[Low,Quantity]),
+    (lemma:"kevés",pos:Adjective,traits:[Shortening,Low,Quantity]),
+    (lemma:"számos",pos:Adjective,traits:[Low,Quantity]),
+    (lemma:"számtalan",pos:Adjective,traits:[Quantity]),
+    (lemma:"temérdek",pos:Adjective,traits:[Quantity]),
+    (lemma:"rengeteg",pos:Adjective,traits:[Quantity]),
+    (lemma:"elég",pos:Adjective,traits:[Low,Shortening,Quantity]),
+    (lemma:"minden",pos:Pronoun),
+    (lemma:"mindegyik",pos:Pronoun),
+    (lemma:"némely",pos:Pronoun),
+    (lemma:"néhány",pos:Pronoun),
+    (lemma:"bármely",pos:Pronoun),
+    (lemma:"bármelyik",pos:Pronoun),
+    (lemma:"valamely",pos:Pronoun),
+    (lemma:"valamennyi",pos:Pronoun),
+    (lemma:"semmi",pos:Pronoun),
+    (lemma:"semmilyen",pos:Adjective),
+    (lemma:"valami",pos:Pronoun,traits:[Front]),
+    (lemma:"valaki",pos:Pronoun,traits:[Front]),
+    (lemma:"senki",pos:Pronoun),
+    (lemma:"bárki",pos:Pronoun,traits:[Front]),
+    (lemma:"bármi",pos:Pronoun,traits:[Front]),
+    (lemma:"akárki",pos:Pronoun,traits:[Front]),
+    (lemma:"akármi",pos:Pronoun,traits:[Front]),
+    (lemma:"egymás",pos:Pronoun,traits:[NoPossessive]),
+    (lemma:"olyan",pos:Adjective),
+    (lemma:"ilyen",pos:Adjective),
+    (lemma:"amolyan",pos:Adjective),
+    (lemma:"emilyen",pos:Adjective),
+    (lemma:"ugyanolyan",pos:Adjective),
+    (lemma:"ugyanilyen",pos:Adjective),
+    (lemma:"milyen",pos:Adjective),
+    (lemma:"mekkora",pos:Adjective),
+    (lemma:"akkora",pos:Adjective),
+    (lemma:"ekkora",pos:Adjective),
+    // PH-ASSIM-003 puts `-fajta` and `-féle` beside `-kora`: the demonstrative's `z` assimilates
+    // to the member, which no compound seam rewrites, and the rule's predictability is lexical,
+    // so the four forms are listed as `akkora` and `ekkora` already are (`efféle` 81,106,
+    // `afféle` 58,735, `effajta` 19,098, `affajta` 89 [WC2]).
+    (lemma:"affajta",pos:Adjective),
+    (lemma:"afféle",pos:Adjective),
+    (lemma:"effajta",pos:Adjective),
+    (lemma:"efféle",pos:Adjective),
+
+    // The sublative of a quantity pronoun, lexicalised as a degree adverb. The pronoun reading is
+    // derived anyway, so these add the second one the corpus records: `annyira` is lemmatised
+    // `annyira` 1,993,908 times, `ennyire` 519,753 and `amennyire` 202,344, while `mennyire` is
+    // the pronoun 932,014 times and the adverb 288,596 [WC2]. `azért` and `ezért` are already
+    // here in the same shape.
+    (lemma:"annyira",pos:Adverb),
+    (lemma:"ennyire",pos:Adverb),
+    (lemma:"mennyire",pos:Adverb),
+    (lemma:"amennyire",pos:Adverb),
+    // NOM-ADJ-002: attributive only, so `kicsi` carries the inflection (`kicsik`, `a kicsit`)
+    // and the shared comparative `kisebb` comes from the irregular table.
+    (lemma:"kis",pos:Adjective,traits:[AttributiveOnly]),
+    (lemma:"két",pos:Numeral),
+
+    // The numeral stem table of PND-NUMINF-001. morphdb ships no numeral lexicon, and these are a
+    // closed list. Only the properties go here; every inflected form follows from the NOM rules,
+    // which is why `öt` and `hat` carry nothing at all (both are non-lowering, and their linking
+    // vowel is the plain three-way `O`).
+    (lemma:"nulla",pos:Numeral),
+    (lemma:"egy",pos:Numeral),
+    (lemma:"kettő",pos:Numeral),
+    (lemma:"három",pos:Numeral,traits:[Epenthetic,Low]),
+    // PND-FRAC-004: `másfél` inflects as `fél` (`másfelet`) and takes `-szOr` (`másfélszer`).
+    (lemma:"másfél",pos:Numeral,traits:[Low,Shortening]),
+    (lemma:"négy",pos:Numeral),
+    (lemma:"öt",pos:Numeral),
+    (lemma:"hat",pos:Numeral),
+    (lemma:"hét",pos:Numeral,traits:[Shortening,Low]),
+    (lemma:"nyolc",pos:Numeral,traits:[Low]),
+    (lemma:"kilenc",pos:Numeral,traits:[Low]),
+    (lemma:"tíz",pos:Numeral,traits:[Low]),
+    (lemma:"húsz",pos:Numeral,traits:[Low]),
+    (lemma:"harminc",pos:Numeral,traits:[Low]),
+    (lemma:"negyven",pos:Numeral,traits:[Low]),
+    (lemma:"ötven",pos:Numeral,traits:[Low]),
+    (lemma:"hatvan",pos:Numeral,traits:[Low]),
+    (lemma:"hetven",pos:Numeral,traits:[Low]),
+    (lemma:"nyolcvan",pos:Numeral,traits:[Low]),
+    (lemma:"kilencven",pos:Numeral,traits:[Low]),
+    (lemma:"száz",pos:Numeral,traits:[Low]),
+    (lemma:"ezer",pos:Numeral,traits:[Epenthetic,Low]),
+    (lemma:"millió",pos:Numeral),
+    (lemma:"milliárd",pos:Numeral),
+    (lemma:"billió",pos:Numeral),
+    (lemma:"billiárd",pos:Numeral),
+    (lemma:"trillió",pos:Numeral),
+
+    // The suppletive verbs of VRB-IRR-001..010. morphdb keeps these in its grammar as irregular
+    // paradigms rather than as lexicon rows, so none of them survived the conversion. Their stems
+    // live in `picur-morph-core/src/irregular.rs`; what is needed here is only the entry itself,
+    // plus `Back` for `iszik`, whose vowels are all neutral and whose harmony the spelling
+    // therefore cannot show (`ittam`, `igyunk`, `ihat`).
+    // The negative copula. VRB-PARA-002 gives the paradigm row `nincs ~ nincsen`, `nincsenek`
+    // and `sincs ~ sincsen`, `sincsenek` (= `sem` + `van`); the forms are defective, so they are
+    // entries rather than cells of `van`. morphdb carries `nincs` alone.
+    //
+    // Rules: VRB-PARA-002
+    // DER-ADV-002: the `ú`/`ű` adjectives whose manner adverb truncates the stem. The rule calls
+    // the set closed and the truncation lexical, so the adverbs are entries; the productive
+    // `-An` of DER-ADV-001 gives `szomorúan` and `keserűen` for everything else.
+    //
+    // Rules: DER-ADV-002
+    (lemma:"hosszan",pos:Adverb),
+    (lemma:"lassan",pos:Adverb),
+    (lemma:"ifjan",pos:Adverb),
+    (lemma:"könnyen",pos:Adverb),
+
+    (lemma:"nincsen",pos:Verb),
+    (lemma:"sincs",pos:Verb),
+    (lemma:"sincsen",pos:Verb),
+    (lemma:"sincsenek",pos:Verb),
+
+    // `lévő` beside `levő`, both standard [AkH12 §25], listed together by VRB-PART-002. The
+    // participles of the suppletive verbs are ordinary lexicon entries like `való` and `jövő`, and
+    // morphdb carries every one of them except this variant, which is the commoner of the pair:
+    // `lévő` 2,607,598 against `levő` 408,415 [WC2].
+    //
+    // Rules: VRB-PART-002
+    (lemma:"lévő",pos:Adjective),
+    (lemma:"lévő",pos:Noun),
+
+    (lemma:"van",pos:Verb),
+    (lemma:"lesz",pos:Verb),
+    (lemma:"megy",pos:Verb),
+    (lemma:"jön",pos:Verb),
+    (lemma:"eszik",pos:Verb,traits:[Transitive]),
+    (lemma:"iszik",pos:Verb,traits:[Back,Transitive]),
+    (lemma:"tesz",pos:Verb,traits:[Transitive]),
+    (lemma:"vesz",pos:Verb,traits:[Transitive]),
+    (lemma:"visz",pos:Verb,traits:[Transitive]),
+    (lemma:"hisz",pos:Verb,traits:[Transitive]),
+
+    // VRB-STEM-009 names these two as a closed exception pair in the past: `aludt` and `feküdt`
+    // against `-Ott` for every other member of the class (`nyugodott`, `esküdött`,
+    // `cselekedett`). The computed answer follows the `d`-final coda and is `-Ott`, which is right
+    // for the rest, so only these two carry the trait.
+    (lemma:"alszik",pos:Verb,traits:[SzDVStem,PastFinalT],alt:"alud"),
+    (lemma:"fekszik",pos:Verb,traits:[SzDVStem,PastFinalT],alt:"feküd"),
+    (lemma:"nyugszik",pos:Verb,traits:[SzDVStem],alt:"nyugod"),
+    (lemma:"haragszik",pos:Verb,traits:[SzDVStem],alt:"haragud"),
+    (lemma:"esküszik",pos:Verb,traits:[SzDVStem],alt:"esküd"),
+    (lemma:"alkuszik",pos:Verb,traits:[SzDVStem],alt:"alkud"),
+    (lemma:"cselekszik",pos:Verb,traits:[SzDStem],alt:"cseleked"),
+    (lemma:"dicsekszik",pos:Verb,traits:[SzDStem],alt:"dicseked"),
+    (lemma:"törekszik",pos:Verb,traits:[SzDStem],alt:"töreked"),
+    (lemma:"növekszik",pos:Verb,traits:[SzDStem],alt:"növeked"),
+    (lemma:"igyekszik",pos:Verb,traits:[SzDStem],alt:"igyekez"),
+    (lemma:"emlékszik",pos:Verb,traits:[SzDStem],alt:"emlékez"),
+    (lemma:"gyülekszik",pos:Verb,traits:[SzDStem],alt:"gyülekez"),
+    // ORT-FOR-012's own examples: a foreign spelling whose suffix follows the pronunciation,
+    // which `alt` gives in Hungarian letters. The spelling stays, the suffix goes after a hyphen.
+    (lemma:"Cambridge",pos:Noun,traits:[Spoken],alt:"kembridzs"),
+    (lemma:"Shakespeare",pos:Noun,traits:[Spoken],alt:"sekszpír"),
+    // The lowercase twin the converted lexicon keeps for `shakespeare-i` is the same name.
+    (lemma:"shakespeare",pos:Noun,traits:[Spoken],alt:"sekszpír"),
+    (lemma:"Glasgow",pos:Noun,traits:[Spoken],alt:"glaszgó"),
+    (lemma:"Rousseau",pos:Noun,traits:[Spoken],alt:"russzó"),
+    (lemma:"Loire",pos:Noun,traits:[Spoken],alt:"loár"),
+    (lemma:"Voltaire",pos:Noun,traits:[Spoken],alt:"volter"),
+    (lemma:"Molière",pos:Noun,traits:[Spoken],alt:"molier"),
+    (lemma:"Montesquieu",pos:Noun,traits:[Spoken],alt:"monteszkjő"),
+    (lemma:"Montreux",pos:Noun,traits:[Spoken],alt:"montrő"),
+    (lemma:"Peugeot",pos:Noun,traits:[Spoken],alt:"pözsó"),
+    (lemma:"guillotine",pos:Noun,traits:[Spoken],alt:"gijotin"),
+    // PH-HARM-011: a two-neutral stem that is back against the default, one of the six such
+    // stems in the rule's data: `áprilisban`.
+    (lemma:"április",pos:Noun,traits:[Back,BareAccusative,PossessiveA]),
+    // NOM-CASE-016's closed set: the towns that take the locative.
+    (lemma:"Pécs",pos:Noun,traits:[Locative]),
+    (lemma:"Győr",pos:Noun,traits:[Locative]),
+    (lemma:"Vác",pos:Noun,traits:[Locative]),
+    (lemma:"Kaposvár",pos:Noun,traits:[Locative]),
+    (lemma:"Kolozsvár",pos:Noun,traits:[Locative]),
+    (lemma:"Székesfehérvár",pos:Noun,traits:[Locative]),
+    (lemma:"Vásárhely",pos:Noun,traits:[Locative]),
+    // PH-HARM-011: suffixed in both harmonies by the norm [ENY-SZLOVEN], the front form preferred.
+    (lemma:"szlovén",pos:Noun,traits:[BareAccusative,Front,HarmonyOptional]),
+    (lemma:"szlovén",pos:Adjective,traits:[Front,HarmonyOptional]),
+    (lemma:"Athén",pos:Noun,traits:[HarmonyOptional]),
+    // PND-FRAC-004: `fél` is a numeral and opens numeral compounds (`félezer`); PND-INDF: `mind`
+    // is the universal prefix of `mindkét`, `mindhárom`, `mindegyik`.
+    (lemma:"fél",pos:Numeral,traits:[Low,Shortening]),
+    (lemma:"mind",pos:Determiner),
+    // NOM-STEM-005: the metathesis stems syncopate (`terhek`, `pelyhet`, `kelyhek`); morphdb
+    // lists them plain.
+    (lemma:"teher",pos:Noun,traits:[Epenthetic,LinkedAccusative]),
+    (lemma:"pehely",pos:Noun,traits:[Epenthetic,LinkedAccusative]),
+    (lemma:"kehely",pos:Noun,traits:[Epenthetic,LinkedAccusative]),
+    // NOM-POSS-006: the deverbal `-t` noun keeps `-je` apart from the past tense (`jelöltje`);
+    // morphdb has only the adjective.
+    (lemma:"jelölt",pos:Noun,traits:[Low,LinkedAccusative,PossessiveJa]),
+    // PND-INDF-004's `sok` series: the quantity pronoun `megannyi`, which morphdb lacks.
+    (lemma:"megannyi",pos:Pronoun,traits:[SingularOnly]),
+    // DER-NOUN-002: the linked `-esség` of the geminate bases, which morphdb lacks.
+    (lemma:"frissesség",pos:Noun),
+    (lemma:"nyersesség",pos:Noun),
+    // PND-INDF-005: `mind` joins only these two numerals (`*mindnégy`).
+    (lemma:"mindkét",pos:Numeral),
+    (lemma:"mindkettő",pos:Numeral,traits:[Low]),
+    (lemma:"mindhárom",pos:Numeral,traits:[Epenthetic,Low]),
+    // VRB-LINK-010: `hullanak` ~ `hullnak`; the verb beside `hullik`.
+    (lemma:"hull",pos:Verb,traits:[HeavyStem,LinkOptional,PastFinalVtt,PastNonfinalVtt]),
+    // Words the rulebook derives that morphdb does not list (DER-MODEL-007, DER-NOUN-003,
+    // DER-VERB-009, ORT-LEN-023).
+    (lemma:"labilitás",pos:Noun),
+    (lemma:"lazul",pos:Verb),
+    (lemma:"sarkalatos",pos:Adjective),
+    (lemma:"szultánság",pos:Noun),
+    (lemma:"torkolat",pos:Noun),
+    // NOM-LOW-005: `farkam` generated, `farkom` accepted; plural and accusative plain.
+    (lemma:"farok",pos:Noun,traits:[LinkedAccusative,PossessiveA,Epenthetic,AlternationOptional,Low,LowPluralExempt,LowAccusativeExempt]),
+    // DER-NOUN-002: `dózsénak` preferred, `dózsének` accepted.
+    (lemma:"dózse",pos:Noun,traits:[Back,HarmonyOptional,Occupation]),
+    // NOM-ACC-001, AkH12 §30: `borjút` ~ `borjat`, `borjúk` ~ `borjak`.
+    (lemma:"borjú",pos:Noun,traits:[Low,LinkedAccusative,PossessiveA,UStem,FreeStemAccSup,AlternationOptional]),
+    // NOM-ACC-006: `brosst` preferred, `brossot` accepted (T04).
+    (lemma:"bross",pos:Noun,traits:[BareAccusative,AlternationOptional]),
+    // VRB-LINK-010: `mondotok` preferred, `mondtok` and `mondsz` accepted.
+    (lemma:"mond",pos:Verb,traits:[PastFinalVtt,PastNonfinalT,AlternationOptional,Transitive,HeavyStem,LinkOptional]),
+    // VRB-STEM-007: `kétel` lives in its syncopated forms (`kétlem`, `kétli`, `kétlettem`).
+    (lemma:"kétel",pos:Verb,traits:[Epenthetic,PresentSyncope,DefiniteSyncope,PastSyncope,Transitive]),
+    // ORT-FOR-012, PH-HARM-023: a final `e` pronounced, so the suffix attaches solid and lengthens
+    // it (`Goethével`, `Goethének`).
+    (lemma:"Goethe",pos:Noun,traits:[Spoken],alt:"gőte"),
+    // ORT-FOR-012: an acronym read as a foreign word (`AIDS-szel`).
+    (lemma:"AIDS",pos:Noun,traits:[Spoken],alt:"édsz"),
+    // ORT-FOR-012, NOM-ACC-004: the `ow` spells a long `ó`, so the suffix follows the
+    // pronunciation after a hyphen (`show-t`, `show-ban`).
+    (lemma:"show",pos:Noun,traits:[BareAccusative,PossessiveJa,Spoken],alt:"só"),
+    // DER-NOUN-003: the occupational and functional person nouns the rule names, carrying the
+    // feature it states as its lexical input. `szupermen` is not in morphdb at all (660 [WC2]).
+    (lemma:"menedzser",pos:Noun,traits:[BareAccusative,PossessiveA,Occupation]),
+    (lemma:"bróker",pos:Noun,traits:[BareAccusative,PossessiveA,Occupation]),
+    (lemma:"vezér",pos:Noun,traits:[BareAccusative,PossessiveA,Occupation]),
+    (lemma:"szupermen",pos:Noun,traits:[BareAccusative,PossessiveA,Occupation]),
+    (lemma:"martini",pos:Noun,traits:[PossessiveJa,HarmonyOptional]),
+
+    // DER-MODEL-008: a back base with one neutral vowel, so its `-i` adjective vacillates
+    // (`karibinak ~ karibinek`); morphdb has neither the noun nor the adjective (5,360 [WC2]).
+    (lemma:"karib",pos:Noun,traits:[HarmonyOptional]),
+    // DER-ADJ-010 names these two as intransitive (`*ugrálatlan`, `*repületlen`), and so does the
+    // definite conjugation they otherwise licensed (`*repüli`, `*ugrálja`); the conversion marked
+    // both transitive.
+    (lemma:"repül",pos:Verb,traits:[PastFinalT,PastNonfinalT]),
+    (lemma:"ugrál",pos:Verb,traits:[PastFinalT,PastNonfinalT]),
+    // DER-ADJ-017: the habitual-property adjective of a non-agentive intransitive, the half of
+    // the rule's domain that only the semantic feature `agentive` separates (586, 348 [WC2]).
+    (lemma:"kacsintós",pos:Adjective,traits:[Low]),
+    (lemma:"viszketős",pos:Adjective,traits:[Low]),
+    // DER-NOUN-014, DER-ADJ-005: the sportsperson's equipment noun (5,206 [WC2]).
+    (lemma:"gördeszka",pos:Noun,traits:[Low]),
+    // DER-NOUN-015: `-ista` is `rule` for the form and `lexical` for the existence, so its
+    // members are entries. `chomskysta` spells the `s` of the base out (SMNy3 p. 677).
+    (lemma:"buddha",pos:Noun,traits:[Low]),
+    (lemma:"chomskysta",pos:Noun,traits:[Back,PossessiveJa]),
+    // DER-NOUN-017: `-itás` is productive on the foreign adjective layer, whose membership the
+    // lexicon does not carry, so its nouns are entries beside `labilitás` above.
+    (lemma:"mobilitás",pos:Noun),
+    (lemma:"digitalitás",pos:Noun),
+    // DER-NOUN-020: `-(O)nc` is unproductive; `költönc` is the analogical nonce word
+    // DER-LEX-006 names.
+    (lemma:"költönc",pos:Noun),
+    // DER-MODEL-007, DER-DIM-005: a hypocoristic takes its harmony from the truncated string, so
+    // `Simon` gives front `Siminek`. The chosen form per name is lexical.
+    (lemma:"Simi",pos:Noun,traits:[Front,PossessiveJa]),
+    // DER-DIM-007: the clipped common nouns of the informal register.
+    (lemma:"ubi",pos:Noun,traits:[PossessiveJa]),
+    // DER-DIM-008: the child-language body-part forms, a hypocoristic `-i` plus `-kA`.
+    (lemma:"hajika",pos:Noun,traits:[Low]),
+    (lemma:"lábika",pos:Noun,traits:[Low]),
+    (lemma:"szemike",pos:Noun),
+    // DER-VERB-005, DER-VERB-007, PH-HARM-024: the loan verbalisers `-íroz` and counterharmonic
+    // `-(O)l` occur only in listed verbs, antiharmony and all (`brillíroz`, `curükkol`).
+    (lemma:"brillíroz",pos:Verb,traits:[Back,PastFinalVtt,PastNonfinalT]),
+    (lemma:"blamíroz",pos:Verb,traits:[Back,Transitive]),
+    (lemma:"masíroz",pos:Verb,traits:[Back]),
+    (lemma:"curükkol",pos:Verb,traits:[Back]),
+    // DER-VERB-017: an unproductive aspectual suffix, so the verb is an entry.
+    (lemma:"lopdos",pos:Verb,traits:[Transitive]),
+    // DER-LEX-004, DER-VERB-003: the front loan stem takes `-(O)l`, and the doublet `editál`
+    // splits from it in meaning.
+    (lemma:"editel",pos:Verb,traits:[Epenthetic,Transitive]),
+    // DER-COMP-024: N + V compounds are backformations from the `-Ás` compound and are listed;
+    // new ones are not coined.
+    (lemma:"apróhirdet",pos:Verb,traits:[Transitive]),
+
+    // VRB-STEM-006, AkH12 §44: `állsz` ~ `állasz`; `szégyellni` ~ `szégyelleni`.
+    (lemma:"áll",pos:Verb,traits:[PastFinalT,PastNonfinalT,AlternationOptional,Transitive,LinkOptional]),
+    (lemma:"szégyell",pos:Verb,traits:[PastFinalT,PastNonfinalT,AlternationOptional,Transitive,LinkOptional]),
+
+    // PH-G2P-004: family names kept in their pre-1832 spelling, read with the archaic letter
+    // values. The flag licenses the ambiguous groups of the table (`ts`, `ch`, `cz`, `tz`) and
+    // exempts the Hungarian `gh` from ORT-FOR-012's unusual-final refusal: `Babitscsal`,
+    // `Madáchcsá`, `Móriczcal`, `Rátzcal`, `Véghgel`, `Baloghgal`.
+    (lemma:"Babits",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Kováts",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Takáts",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Madách",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Damjanich",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Festetich",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Móricz",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Rácz",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Rátz",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Czetz",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Metz",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Végh",pos:Noun,traits:[ArchaicSpelling]),
+    (lemma:"Balogh",pos:Noun,traits:[ArchaicSpelling]),
+
+    // PH-CONS-005: the stems whose coda `h` is silent, so `-vAl` and `-vÁ` keep their `v`. `cseh`
+    // is silent for every speaker; the norm leaves the spelling open for `céh`, `düh`, `juh`,
+    // `méh`, `rüh` [AkH12 §74, §82 e)] and usage settles `pléh` the same way (`pléhvel` 71 :
+    // `pléhhel` 5, `pléhet` 55 : `plét` 6 [WC2]). The geminate spelling is read too.
+    (lemma:"cseh",pos:Noun,traits:[LinkedAccusative]),
+    (lemma:"céh",pos:Noun,traits:[LinkedAccusative,PossessiveA]),
+    (lemma:"düh",pos:Noun,traits:[LinkedAccusative,PossessiveA]),
+    (lemma:"juh",pos:Noun,traits:[LinkedAccusative,PossessiveA]),
+    (lemma:"méh",pos:Noun,traits:[LinkedAccusative,PossessiveA]),
+    (lemma:"rüh",pos:Noun,traits:[Low,LinkedAccusative,PossessiveA,AlternationOptional]),
+    (lemma:"pléh",pos:Noun,traits:[LinkedAccusative]),
+
+    // PH-ASSIM-004, PH-G2P-003: the base of the nine prefixed `metsz` verbs the conversion kept
+    // (`bemetsz`, `elmetsz`, ...) was itself absent, so `metsz` 1,686, `metsszük` 2,853 and
+    // `metssze` 343 [WC2] had no reading. Past class taken from the prefixed rows.
+    (lemma:"metsz",pos:Verb,traits:[PastFinalVtt,PastNonfinalVtt,Transitive]),
+
+    // PH-ZERO-004, VRB-STEM-009: whether a cluster-final `-ik` verb fills its gaps with an
+    // epenthetic stem is measured per lexeme. `csuklik` does not (`*csukolj` 9, `csukolhat` 2
+    // against `csuklik` 2,030 [WC2]), so it loses the flag; `vedlik` does (`vedelj` 53,
+    // `vedelhet` 22, against the starred `*vedlj`, `*vedlhet`) and keeps it.
+    (lemma:"csuklik",pos:Verb,traits:[PastFinalVtt,PastNonfinalVtt,Transitive]),
+
+    (lemma:"simi",pos:Noun),
+    (lemma:"tapi",pos:Noun),
+    // PH-HARM-011: `domének` 1,299 : `doménok` 20 [WC2], against the `Bé` class default of 0.845
+    // back, so the front class is stated and the back share accepted.
+    (lemma:"domén",pos:Noun,traits:[Front,HarmonyOptional]),
+    // PH-HARM-012, PH-HARM-022: a `BNN` surname, front by the automaton.
+    (lemma:"Honegger",pos:Noun),
+    // PH-HARM-017: harmony by the last non-neutral vowel, here the final `ó` (`bürónak` 77 [WC2]).
+    (lemma:"büró",pos:Noun),
+    // PH-HARM-017: the norm and usage spell this without the accent (`nüansz` 694 : `nüánsz` 69
+    // [WC2], and MTA-HELYES rejects `nüánsz`), where the conversion carried `nüánsz`.
+    (lemma:"nüansz",pos:Noun),
+    // PH-HARM-015: stems the norm suffixes both ways, back preferred (`derékba` 6,498 :
+    // `derékbe` 142; `agilisnak` 144 : `agilisnek` 49 [WC2]).
+    (lemma:"derék",pos:Noun,traits:[Back,Low,LinkedAccusative,PossessiveA,Shortening,HarmonyOptional]),
+    (lemma:"derék",pos:Adjective,traits:[Back,Low,PossessiveA,Shortening,HarmonyOptional]),
+    (lemma:"agilis",pos:Adjective,traits:[Back,Low,HarmonyOptional]),
+
+    // PH-ASSIM-007: the unwritten j-assimilation shows in the possessive, which is `-ja` here
+    // (`nagyjai` 10,439, `nagyja` 9,120 against `nagyai` 33 [WC2]); the conversion said `-a`.
+    (lemma:"nagy",pos:Noun,traits:[LinkedAccusative,PossessiveJa]),
+    (lemma:"nagy",pos:Adjective,traits:[PossessiveJa]),
+    // The same palatal class, the other way: `gúnya` 1,002 : `gúnyja` 134 [WC2], where the
+    // conversion said `-ja`.
+    (lemma:"gúny",pos:Noun,traits:[PossessiveA]),
+
+    // PH-LEN-009, AkH12 §30: the `ajtó` stems whose plain possessive is a normative doublet
+    // (`zászlaja` 12,826 ~ `zászlója` 3,928; `erdeje` 5,017 ~ `erdője` 426 [WC2]), as `mező`
+    // already is.
+    (lemma:"erdő",pos:Noun,traits:[PossessiveAlt,AlternationOptional]),
+    (lemma:"zászló",pos:Noun,traits:[PossessiveAlt,AlternationOptional]),
+
+    // PH-ZERO-003: the definite cell syncopates after all (`viszonzom` 962 : `viszonozom` 168,
+    // `viszonzás` 2,181 : `viszonozás` 2 [WC2]), against the converted `DefiniteFullStem`.
+    (lemma:"viszonoz",pos:Verb,traits:[Epenthetic,DefiniteSyncope,AlternationOptional,PastNonfinalT,Transitive]),
+
+    // PH-SYL-010: `-sz` follows a licensed final cluster, so the 2sg has both forms
+    // (`lengsz` 37 : `lengesz` 8; `ajánlsz` 154; `fingsz` 8 [WC2]); the linked form stays
+    // preferred where the corpus says so.
+    (lemma:"ajánl",pos:Verb,traits:[PastFinalVtt,PastNonfinalVtt,Transitive,LinkOptional]),
+    (lemma:"leng",pos:Verb,traits:[PastFinalVtt,PastNonfinalVtt,Transitive,LinkOptional]),
+    (lemma:"fingik",pos:Verb,traits:[Back,PastFinalVtt,PastNonfinalVtt,Transitive,LinkOptional]),
+
+    // PH-G2P-008: foreign spellings read with a final sound their letters do not show, suffixed
+    // solid (`Balzackal`, `Wellsszel`, `Greenwichcsel`, `hertzcel`, `Steinbeckkel`, `fairül`).
+    // `last_sound` without `Spoken` is what says "assimilate to this sound, keep the spelling".
+    // `Steinbeck` was absent entirely; `fair` is front against its letters.
+    (lemma:"Balzac",pos:Noun,last_sound:"k"),
+    (lemma:"Wells",pos:Noun,last_sound:"sz"),
+    (lemma:"Greenwich",pos:Noun,last_sound:"cs"),
+    (lemma:"Steinbeck",pos:Noun,last_sound:"k"),
+    (lemma:"hertz",pos:Noun,traits:[LinkedAccusative],last_sound:"c"),
+    (lemma:"fair",pos:Adjective,traits:[Front,PossessiveA],last_sound:"r"),
+
+    // PH-G2P-007, PH-G2P-011, PH-G2P-014, PH-LEN-004, PH-LEN-005, PH-SYL-003, PH-SYL-011,
+    // PH-LEN-002, PH-LEN-015: lexemes the rules name as their own examples and the conversion
+    // did not carry. `allegro` and `libretto` are the foreign spellings the lengthening rules are
+    // about, beside the hungarianised `librettó` and the adverb `allegro`.
+    (lemma:"Lexi",pos:Noun),
+    (lemma:"Orex",pos:Noun),
+    (lemma:"kamikaze",pos:Noun,traits:[Back]),
+    (lemma:"dadaista",pos:Noun),
+    (lemma:"dadaista",pos:Adjective),
+    (lemma:"campanile",pos:Noun),
+    (lemma:"signorina",pos:Noun),
+    (lemma:"allegro",pos:Noun,traits:[Back]),
+    (lemma:"libretto",pos:Noun,traits:[Back]),
+    (lemma:"mnemonika",pos:Noun),
+    (lemma:"lájkol",pos:Verb,traits:[PastFinalT,PastNonfinalT,Transitive]),
+    // PH-LEN-015: the frozen short `-b` comparative, a lexeme of its own (`idősb` 2,069 [WC2]).
+    (lemma:"idősb",pos:Adjective),
+
+    // PH-LEN-003: the name the rule contrasts with `Che` for final-`e` lengthening (`Ocse` ->
+    // `Ocsét`), which the conversion did not carry.
+    (lemma:"Ocse",pos:Noun),
+    // PH-G2P-005: the `y` = [i] variant spelling the rule names beside `Teleki`.
+    (lemma:"Teleky",pos:Noun),
+
+    // PH-VSTEM-001: `nyű` adds `v` without shortening in the majority of its tokens
+    // (`nyűvök` 25 : `nyüvök` 4 [WC2]), so the alternation is marked optional as `fő`'s is.
+    (lemma:"nyű",pos:Verb,traits:[Shortening,VStem,PastFinalVtt,Transitive,AlternationOptional]),
+    // The same doublet as a listed adjective, where no stem alternation reaches it
+    // (`fövetlen` 39 : `fővetlen` 22 [WC2]).
+    (lemma:"fővetlen",pos:Adjective),
+    // NOM-ACC-008: `öblöt` ~ `öbölt`, `bajuszt` ~ `bajszot` (the free stem takes the bare `-t`
+    // after the sibilant), `eszet` ~ `észt`.
+    (lemma:"öböl",pos:Noun,traits:[PossessiveA,Epenthetic,AlternationOptional]),  // 3,898 : 216
+    (lemma:"bajusz",pos:Noun,traits:[BareAccusative,PossessiveA,Epenthetic,FreeStemAccSup,AlternationOptional]),  // 4,257 : 958
+    (lemma:"ész",pos:Noun,traits:[Low,BareAccusative,PossessiveA,Shortening,FreeStemAccSup,FreeStemPlural,LowAccusativeExempt,SingularOnly,AlternationOptional]),
+    // NOM-ACC-005: the noun takes the bare `-t` while the adjective lowers (`pirost` 968 noun
+    // tokens against `pirosat` 2).
+    (lemma:"piros",pos:Noun,traits:[Low,BareAccusative,LowAccusativeExempt]),
+    // NOM-STEM-018: the `tó` ~ `tavat` doublet does not extend to `ló`, which has `lovat` only
+    // (`lovat` 54,184 : `lót` 0, `lovak` 86,234 : `lók` 1,062, `lova` 19,368 : `lója` 194 [WC2]).
+    (lemma:"ló",pos:Noun,traits:[Low,PossessiveA,Shortening,VStem]),
+    // NOM-STEM-018, AkH12 §30: `falvak` ~ `faluk` (71,591 : 4,267 [WC2]).
+    (lemma:"falu",pos:Noun,traits:[Low,PossessiveJa,VStem,UStem,FreeStemAccSup,PossessedPluralA,AlternationOptional]),
+    // NOM-POSS-009: `fia` 'son of' beside `fiúja` 'boyfriend of', the listed form and the
+    // regular `-ja`; the other traits restate the conversion.
+    (lemma:"fiú",pos:Noun,traits:[PossessiveA,FreeStemAccSup,FreeStemPlural,AlternationOptional,PossessiveOptional]),
+    // NOM-POSS-009: both third person forms are words, the alternant the inalienable sense.
+    (lemma:"gyapjú",pos:Noun,traits:[Low,PossessiveJa,UStem,FreeStemAccSup,AlternationOptional]),
+    // NOM-STEM-013, NOM-POSS-009: `teteje` 'top of' beside `tetője` 'roof of'.
+    (lemma:"tető",pos:Noun,traits:[PossessiveAlt,AlternationOptional]),
+    // PH-ZERO-002: the unstable cells keep the free stem beside the alternant.
+    (lemma:"bátor",pos:Adjective,traits:[Low,Epenthetic,FreeStemAccSup,AlternationOptional]),
+    (lemma:"sarok",pos:Noun,traits:[PossessiveA,Epenthetic,FreeStemPossessive]),
+    (lemma:"retek",pos:Noun,traits:[LinkedAccusative,PossessiveA,Epenthetic,FreeStemPossessive]),
+    // ORT-TOG-047: the items the 2015 dictionary writes solid, and the AkH11 solid forms it took
+    // apart, which older texts carry.
+    (lemma:"számontart",pos:Verb),
+    (lemma:"számonkér",pos:Verb),
+    (lemma:"együttérez",pos:Verb),
+    (lemma:"nagyratörő",pos:Adjective),
+    (lemma:"gyengénlátó",pos:Adjective),
+    (lemma:"gyengénlátó",pos:Noun),
+    (lemma:"tenyérbemászó",pos:Adjective),
+    (lemma:"előregyártott",pos:Adjective),
+    (lemma:"nyitvatartás",pos:Noun),
+    (lemma:"észretérítés",pos:Noun),
+    (lemma:"egyidőben",pos:Adverb),
+    (lemma:"tajszám",pos:Noun),
+    (lemma:"nyakoncsapás",pos:Noun),
+    // DER-VERB-011: `-(A)ll` is lexical; `rövidell` 31 [WC2].
+    (lemma:"rövidell",pos:Verb,traits:[Transitive]),
+    // NOM-CASE-021: `-ntA` is lexical; the attested time-noun adverbs over 100 tokens [WC2].
+    (lemma:"éjjelente",pos:Adverb),
+    (lemma:"éjente",pos:Adverb),
+    (lemma:"hajnalonta",pos:Adverb),
+    (lemma:"hónaponta",pos:Adverb),
+    (lemma:"vasárnaponta",pos:Adverb),
+    (lemma:"hétköznaponta",pos:Adverb),
+    (lemma:"hétvégente",pos:Adverb),
+]

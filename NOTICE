@@ -1,0 +1,14 @@
+picur-morph
+
+crates/picur-morph-lexicon/data/{noun,adjective,verb,adverb,interjection,postposition,conjunction,preverb}.ron
+are derived from morphdb.hu (commit 1984ce20c414280e01a3546ac4d365746587109e,
+https://github.com/morphdb/morphdb.hu) by Eszter Simon, Péter Rebrus, András Rung, Viktor Trón
+and Péter Vajda, licensed under CC BY 2.5 (https://creativecommons.org/licenses/by/2.5/).
+
+crates/picur-morph-lexicon/data/frequency.ron holds word frequency statistics, pooled by scanned
+volume, from these corpora. No text from them is reproduced; the table records which forms occur
+and at what rate.
+- HPLT 2.0 cleaned, hun_Latn (CC0-1.0, https://huggingface.co/datasets/HPLT/HPLT2.0_cleaned)
+- FineWeb2-HQ, hun_Latn (ODC-BY-1.0, https://huggingface.co/datasets/epfml/FineWeb2-HQ)
+- lazos/gazette-hu, Magyar Közlöny (CC0-1.0, https://huggingface.co/datasets/lazos/gazette-hu)
+- lazos/gutenberg-hu, Project Gutenberg (public domain, https://huggingface.co/datasets/lazos/gutenberg-hu)

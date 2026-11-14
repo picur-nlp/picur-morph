@@ -1,0 +1,58 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+repository = "https://github.com/picur-nlp/picur-morph"
+homepage = "https://github.com/picur-nlp/picur-morph"
+readme = "README.md"
+authors = ["Lajos Bencz <lazos@lazos.me>"]
+keywords = ["hungarian", "morphology", "nlp", "linguistics"]
+categories = ["text-processing"]
+
+[workspace.dependencies]
+picur-morph-ortho = { path = "crates/picur-morph-ortho", version = "0.1.0" }
+picur-morph-lexicon = { path = "crates/picur-morph-lexicon", version = "0.1.0" }
+picur-morph-core = { path = "crates/picur-morph-core", version = "0.1.0" }
+picur-morph-spell = { path = "crates/picur-morph-spell", version = "0.1.0" }
+picur-morph-repair = { path = "crates/picur-morph-repair", version = "0.1.0" }
+picur-morph-lint = { path = "crates/picur-morph-lint", version = "0.1.0" }
+picur-morph-rank = { path = "crates/picur-morph-rank", version = "0.1.0" }
+picur-morph = { path = "crates/picur-morph", version = "0.1.0" }
+clap = { version = "4.6.7", features = ["derive"] }
+serde_json = "1.0.151"
+encoding_rs = "0.8.41"
+oem_cp = "2.1.2"
+smallvec = "1.15.1"
+compact_str = "0.10.0"
+serde = { version = "1.0.229", features = ["derive"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "warn"
+missing_debug_implementations = "warn"
+missing_docs = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+allow_attributes = "warn"
+allow_attributes_without_reason = "warn"
+dbg_macro = "warn"
+expect_used = "warn"
+iter_over_hash_type = "warn"
+print_stderr = "warn"
+print_stdout = "warn"
+todo = "warn"
+unwrap_used = "warn"
+
+[profile.test]
+opt-level = 2

@@ -1,0 +1,30 @@
+name: Cache prune
+
+# After a successful CI run on main, keep only the newest cache of each CI job on main and
+# delete every other cache; only main saves caches (see `save-if` in ci.yml).
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  actions: write
+
+jobs:
+  prune:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: delete stale caches
+        run: |
+          gh cache list --limit 1000 --json id,key,ref,createdAt --jq '
+            (map(select(.ref == "refs/heads/main"))
+              | group_by(.key | split("-")[0:5] | join("-"))
+              | map(sort_by(.createdAt) | reverse | .[1:][])
+              | .[].id),
+            (map(select(.ref != "refs/heads/main")) | .[].id)
+          ' | while read -r id; do gh cache delete "$id"; done

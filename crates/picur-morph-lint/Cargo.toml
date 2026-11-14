@@ -1,0 +1,21 @@
+[package]
+name = "picur-morph-lint"
+description = "Hungarian punctuation and typography diagnostics over picur-morph"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+picur-morph-ortho.workspace = true
+picur-morph-core.workspace = true
+picur-morph-lexicon.workspace = true
+
+[lints]
+workspace = true

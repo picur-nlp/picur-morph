@@ -1,0 +1,48 @@
+// The character and sequence tables the repair rules name. Hand-written from the rulebook; each
+// table cites its rule. The mechanisms live in the crate, the substitutions here.
+//
+// `rows` of `from, to, rule` for a rewrite; `pairs` for a substitution. A code point that does
+// not print is written `\u{XXXX}`.
+[
+    // REP-ARCH-002 .. REP-ARCH-005: historical spellings, longest pattern first.
+    (role:Archaic, rules:"REP-ARCH-002 REP-ARCH-003 REP-ARCH-004 REP-ARCH-005", rows:[["szsz","ssz","REP-ARCH-004"],["zszs","zzs","REP-ARCH-004"],["cscs","ccs","REP-ARCH-004"],["gygy","ggy","REP-ARCH-004"],["nyny","nny","REP-ARCH-004"],["lyly","lly","REP-ARCH-004"],["tyty","tty","REP-ARCH-004"],["czcz","cc","REP-ARCH-002"],["ccz","cc","REP-ARCH-002"],["cz","c","REP-ARCH-002"],["ggy","dj","REP-ARCH-005"],["nny","nj","REP-ARCH-005"],["tty","tj","REP-ARCH-005"],["lly","lj","REP-ARCH-005"],["ts","cs","REP-ARCH-003"],["tz","c","REP-ARCH-003"],["ds","dzs","REP-ARCH-003"]]),
+    // REP-SPELL-007, ORT-ASSIM-011 .. ORT-ASSIM-021: the j-assimilation errors, longest first.
+    (role:Assimilation, rules:"REP-SPELL-007", rows:[["ísd","ítsd","REP-SPELL-007"],["ísuk","ítsuk","REP-SPELL-007"],["ísátok","ítsátok","REP-SPELL-007"],["dzj","ddz","REP-SPELL-007"],["szj","ssz","REP-SPELL-007"],["gyj","ggy","REP-SPELL-007"],["ssd","sd","REP-SPELL-007"],["sj","ss","REP-SPELL-007"],["zj","zz","REP-SPELL-007"],["ts","ss","REP-SPELL-007"]]),
+    // WS-ENC-010: the lookalike letters a font substitutes for the double acute.
+    (role:Lookalike, rules:"WS-ENC-010", rows:[["õ","ő","WS-ENC-010"],["ô","ő","WS-ENC-010"],["û","ű","WS-ENC-010"],["Õ","Ő","WS-ENC-010"],["Ô","Ő","WS-ENC-010"],["Û","Ű","WS-ENC-010"]]),
+    // WS-CHAR-010: the compatibility code points that decompose to letter sequences.
+    (role:Compatibility, rules:"WS-CHAR-010 REP-FONT-006", pairs:[("\u{FB00}","ff"),("\u{FB01}","fi"),("\u{FB02}","fl"),("\u{FB03}","ffi"),("\u{FB04}","ffl"),("\u{FB05}","st"),("\u{FB06}","st"),("\u{01F1}","DZ"),("\u{01F2}","Dz"),("\u{01F3}","dz")]),
+    // ORT-ASSIM-016: each multi-character consonant letter with its long spelling, longest first.
+    (role:LongDigraph, rules:"ORT-ASSIM-016 REP-SPELL-005", pairs:[("dzs","ddzs"),("cs","ccs"),("dz","ddz"),("gy","ggy"),("ly","lly"),("ny","nny"),("sz","ssz"),("ty","tty"),("zs","zzs")]),
+    // REP-SPELL-001 .. REP-SPELL-003, REP-DIAC-011, REP-KEY-008, REP-FONT-003, REP-OCR-001: the
+    // spellings confused for one another, tried in the direction written.
+    (role:Confusion, rules:"REP-SPELL-001 REP-SPELL-002 REP-SPELL-003 REP-DIAC-011 REP-KEY-008 REP-FONT-003 REP-OCR-001", pairs:[("ly","j"),("j","ly"),("í","i"),("i","í"),("ú","u"),("u","ú"),("ű","ü"),("ü","ű"),("ó","o"),("o","ó"),("ő","ö"),("ö","ő"),("á","a"),("a","á"),("é","e"),("e","é"),("ó","ő"),("ő","ó"),("ú","ű"),("ű","ú"),("ő","ű"),("ű","ő"),("f","s"),("rn","m"),("m","rn"),("cl","d"),("1","l"),("0","o"),("5","s")]),
+    // REP-OCR-001: what OCR reads a letter as.
+    (role:OcrConfusion, rules:"REP-OCR-001", pairs:[("é","e"),("e","é"),("á","a"),("í","i"),("í","l"),("í","1"),("ó","o"),("ó","ö"),("ö","o"),("ö","ó"),("ő","ö"),("ő","o"),("ő","õ"),("ő","ô"),("ú","u"),("ü","u"),("ű","ü"),("ű","u"),("ű","û"),("rn","m"),("m","rn"),("cl","d"),("li","h"),("h","b"),("in","m"),("ri","n"),("u","n"),("n","u"),("e","c"),("c","e"),("t","f"),("f","t"),("g","q"),("q","g"),("l","1"),("1","l"),("O","0"),("0","O"),("S","5"),("5","S"),("B","8"),("8","B"),("Z","2"),("2","Z"),("ſ","f")]),
+    // REP-DIAC-001: each bare vowel with the letters an accent could make of it.
+    (role:Diacritic, rules:"REP-DIAC-001", pairs:[("a","aá"),("e","eé"),("i","ií"),("o","oóöő"),("u","uúüű")]),
+    // REP-FONT-001: the private-use slots a font puts its ligatures in.
+    (role:LigatureSlot, rules:"REP-FONT-005", pairs:[("\u{F000}","ff"),("\u{F001}","fi"),("\u{F002}","fl"),("\u{F003}","ffi"),("\u{F004}","ffl")]),
+    // REP-FONT-005: early-print letters and the combining e of the umlaut.
+    (role:EarlyPrint, rules:"REP-FONT-012", pairs:[("\u{017F}","s"),("\u{A75B}","r"),("\u{0364}","")]),
+    // REP-KEY-006: each spacing accent with the combining mark it stands for.
+    (role:SpacingAccent, rules:"REP-KEY-006", pairs:[("\u{02DD}","\u{030B}"),("\u{00A8}","\u{0308}"),("\u{00B4}","\u{0301}"),("\u{02C7}","\u{030C}"),("\u{005E}","\u{0302}"),("\u{02D8}","\u{0306}"),("\u{02D9}","\u{0307}"),("\u{00B8}","\u{0327}"),("\u{00B0}","\u{030A}")]),
+    // REP-FONT-004: the one-slot shift of a mis-encoded font.
+    (role:FontShift, rules:"REP-FONT-003", pairs:[("\u{0131}","ő"),("ő","ű"),("\u{0130}","Ő"),("Ő","Ű")]),
+    // REP-FONT-002, WS-ENC-010: every accent a font puts where the double acute belongs.
+    (role:DoubleAcute, rules:"REP-FONT-001 REP-ENC-006 WS-ENC-010", pairs:[("õ","ő"),("ô","ő"),("ǒ","ő"),("ŏ","ő"),("ò","ő"),("ō","ő"),("ȍ","ő"),("û","ű"),("ũ","ű"),("ǔ","ű"),("ŭ","ű"),("ù","ű"),("ū","ű"),("ȕ","ű"),("Õ","Ő"),("Ô","Ő"),("Ǒ","Ő"),("Ŏ","Ő"),("Ò","Ő"),("Ō","Ő"),("Ȍ","Ő"),("Û","Ű"),("Ũ","Ű"),("Ǔ","Ű"),("Ŭ","Ű"),("Ù","Ű"),("Ū","Ű"),("Ȕ","Ű")]),
+    // REP-ENC-012: the CWI-2 code page's letters read as Latin-1.
+    (role:Cwi2, rules:"REP-ENC-009", pairs:[("º","Ő"),("ÿ","Ű"),("ì","Í"),("Ì","Í"),("Å","Á"),("å","á"),("ò","Ó"),("Ò","Ó"),("ù","Ú"),("Ù","Ú")]),
+    // REP-FONT-011: the Cyrillic and Greek letters that look like Latin ones.
+    (role:Homoglyph, rules:"REP-FONT-011", pairs:[("а","a"),("е","e"),("і","i"),("о","o"),("р","p"),("с","c"),("у","y"),("х","x"),("ӧ","ö"),("ӱ","ü"),("ӳ","ű"),("Ӧ","Ö"),("Ӱ","Ü"),("Ӳ","Ű"),("А","A"),("В","B"),("Е","E"),("К","K"),("М","M"),("Н","H"),("О","O"),("Р","P"),("С","C"),("Т","T"),("Х","X"),("ο","o"),("ό","ó"),("α","a"),("ν","v"),("Α","A"),("Β","B"),("Ε","E"),("Ζ","Z"),("Η","H"),("Ι","I"),("Κ","K"),("Μ","M"),("Ν","N"),("Ο","O"),("Ρ","P"),("Τ","T"),("Υ","Y"),("Χ","X"),("\u{0131}","i"),("\u{0130}","I")]),
+    // REP-ENC-014: the telegram doubling, longest first.
+    (role:Telegram, rules:"REP-ENC-014", pairs:[("oeoe","ő"),("ueue","ű"),("aa","á"),("ee","é"),("ii","í"),("oo","ó"),("uu","ú"),("oe","ö"),("ue","ü")]),
+    // REP-KEY-005: the mail domains an address is repaired against.
+    (role:MailDomain, rules:"REP-KEY-005", words:["gmail.com","freemail.hu","citromail.hu","yahoo.com","yahoo.co.uk","hotmail.com","outlook.com","live.com","icloud.com","t-online.hu","index.hu","chello.hu","upcmail.hu","vipmail.hu","indamail.hu","mail.hu","invitel.hu","digikabel.hu","pr.hu","axelero.hu","tvnetwork.hu","hu.inter.net"]),
+    // REP-KEY-003: the keys of a Hungarian keyboard typed under the US layout, and the digits
+    // that come out as letters the other way round.
+    (role:UsLayout, rules:"REP-KEY-003", pairs:[("[","ő"),("]","ú"),("'","á"),(";","é"),("\\","ű"),("0","ö"),("-","ü"),("=","ó"),("{","Ő"),("}","Ú"),("\"","Á"),(":","É"),("|","Ű"),(")","Ö"),("_","Ü"),("+","Ó")]),
+    (role:HungarianDigit, rules:"REP-KEY-003", pairs:[("ö","0"),("Ö","0")]),
+    // REP-KEY-003: the seven-bit convention, a vowel and a digit for an accented letter.
+    (role:SevenBitDigit, rules:"REP-KEY-003 REP-ENC-014", rows:[["a","1","á"],["e","1","é"],["i","1","í"],["o","1","ó"],["o","2","ö"],["o","3","ő"],["u","1","ú"],["u","2","ü"],["u","3","ű"]]),
+]

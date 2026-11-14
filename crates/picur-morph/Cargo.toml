@@ -1,0 +1,36 @@
+[package]
+name = "picur-morph"
+description = "Hungarian morphology, orthography, spellchecking, text repair and document ranking, in pure Rust"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+picur-morph-ortho.workspace = true
+picur-morph-lexicon.workspace = true
+picur-morph-core.workspace = true
+picur-morph-spell.workspace = true
+picur-morph-repair.workspace = true
+picur-morph-lint.workspace = true
+picur-morph-rank.workspace = true
+clap = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+
+[features]
+default = ["cli"]
+cli = ["dep:clap", "dep:serde_json"]
+
+[[bin]]
+name = "picur-morph"
+path = "src/main.rs"
+required-features = ["cli"]
+
+[lints]
+workspace = true

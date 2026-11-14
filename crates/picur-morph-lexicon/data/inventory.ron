@@ -1,0 +1,154 @@
+// The closed word classes the rules name. Hand-written from the rulebook; each list cites its rule.
+// Logic stays in the engine, the words live here: a rule that says "these words" is stated here
+// and nowhere else.
+//
+// Three row shapes: `words` for a plain list, `pairs` for a word and its suppletive form, and
+// `entries` for a word with the category it carries.
+[
+    // NOM-STEM-014: the kinship nouns that truncate before the third person possessive (`apja`,
+    // `atyja`, `bátyjuk`); every compound they close follows them (`nagyapja`, `édesanyja`).
+    (role:KinshipTruncating, words:["apa","anya","atya","bátya"]),
+    // NOM-STEM-004: the h-adding stems whose final `h` the norm may write as silent, so the
+    // instrumental and the translative keep their `v` (`csehvel`, `pléhvé`, `méhvé`); SMNy3
+    // p. 789 lists eight, AkH12 §74 adds `rüh`.
+    (role:SilentHStem, words:["oláh","cseh","éh","céh","pléh","méh","juh","düh","rüh"]),
+    // PND-POSTP-010: the postpositions that license the adjectival `-i`. The rule prints 31
+    // non-lative items; `mentén` is left out because its `-i` truncates (`menti`), and the last
+    // six are added on corpus evidence (`ezelőtti` 161,844, `keresztüli` 35,746, `szemközti`
+    // 32,646, `inneni` 3,345, `körülötti` 1,095, `fölüli` 564 [WC2]).
+    (role:PostpositionAdjective, words:["alatt","fölött","felett","előtt","mögött","mellett","között","közt","körül","körülött","után","szerint","iránt","ellen","nélkül","miatt","által","alól","felől","helyett","elől","közül","mögül","mellől","közben","szemben","kívül","belül","túl","felül","fölül","alul","keresztül","szemközt","ezelőtt","innen"]),
+
+    // PND-INDF-001, PND-REL-001: the prefixes that build the pronoun series on an interrogative.
+    (role:SeriesPrefix, words:["minden","akár","vala","bár","sem","se","né","a"]),
+    // PND-INT-001: the interrogatives the series prefixes to.
+    (role:InterrogativeBase, words:["ki","mi","mely","melyik","milyen","miféle","mekkora","mennyi","hány","hol","hová","hova","honnan","mikor","hogy","hogyan","merre","meddig"]),
+    // PND-DEM-001: the identity prefix and the demonstratives it takes.
+    (role:DemonstrativePrefix, rules:"PND-DEM-011 ORT-TOG-031", words:["ugyan","szint","csak","épp"]),
+    (role:DemonstrativeBase, words:["az","ez","ott","itt","oda","ide","onnan","innen","akkor","ekkor","annyi","ennyi","olyan","ilyen","úgy","így","akkora","ekkora","addig","eddig","azért","ezért","azóta","amúgy"]),
+    // PND-DEM-001, PND-INDF-005: the universal prefix and the two demonstratives it takes
+    // beside its listed compounds (`mindez`, `mindegyik`).
+    (role:UniversalPrefix, words:["mind"]),
+    (role:UniversalDemonstrativeBase, words:["addig","eddig","annyi","ennyi"]),
+
+    // DER-COMP-021: the one- and two-letter words admitted as compound members (`almalé`,
+    // `évszak`); the rule prints the list open-ended.
+    (role:ShortMember, words:["ág","ál","ár","ég","ér","ész","év","fa","fő","fű","hó","ín","ív","íz","jég","kő","lé","ló","mű","nő","ón","ön","ős","őr","sor","só","szó","tő","tó","úr","út","ügy","víz"]),
+    // DER-COMP-021: the short members that also close a coinage; a two-letter head reads into far
+    // too many words (`friss` + `ég`, `szint` + `ér`).
+    (role:ShortHead, words:["ár","év","fa","fő","fű","hó","íz","jég","kő","lé","ló","mű","nő","őr","sor","só","szó","tó","úr","út","ügy","víz"]),
+    // DER-PREF-005: the bound first members no lexicon lists as words (`alelnök`, `kultúrház`);
+    // `euro` is one beside the free `euró` (`eurorégió`, AkH12 §179; `eurozóna`, MTA).
+    (role:BoundMember, words:["al","bel","elő","ét","euro","gyógy","kultúr","kül","ön","pót"]),
+    // DER-COMP-017: the semi-words, each with the category it closes a compound as; `-né` names
+    // a person and `-szerte` (NOM-CASE-022) makes an adverb.
+    (role:SemiWord, entries:[(word:"szerű",pos:Adjective),(word:"féle",pos:Adjective),(word:"fajta",pos:Adjective),(word:"forma",pos:Adjective),(word:"nemű",pos:Adjective),(word:"rét",pos:Adjective),(word:"rétű",pos:Adjective),(word:"mentes",pos:Adjective),(word:"né",pos:Noun),(word:"beli",pos:Adjective),(word:"szerte",pos:Adverb)]),
+
+    // DER-MODEL-008, NOM-CASE-020, DER-ADV-006: `-képp(en)` is the one `F!` suffix that is not a
+    // semi-word, so it needs its own harmony domain: `válaszképpen`, never `*válaszképpon`. The
+    // rest of the class (`-beli`, `-szerű`, `-féle`, `-nemű`, `-mentes`) are semi-words and are
+    // already members of their own domain by DER-COMP-008.
+    (role:OpaqueFrontEnding, words:["képp"]),
+
+    // VRB-CAUS-001, OQ-05-012: the monosyllables that take `-tAt` against the shape rule
+    // (`folytat` 867,536 : `folyat` 4,234 [WC2]).
+    (role:CausativeTat, words:["búj","csíp","foly","gyón","kel","lep","lép","nyom","szop","un","von","él","ér","ül"]),
+    // VRB-CAUS-002: the suppletive causatives.
+    (role:IrregularCausative, pairs:[("eszik","etet"),("iszik","itat"),("tesz","tetet"),("vesz","vetet"),("visz","vitet"),("hisz","hitet"),("alszik","altat"),("fekszik","fektet"),("nyugszik","nyugtat"),("lő","lövet"),("sző","szövet")]),
+    // VRB-STEM-012: the sz-d verbs with an attested `v` stem (`alvó`, `fekvő`); a prefixed verb
+    // belongs with its base and is matched by ending.
+    (role:VStemVerb, words:["alkuszik","alszik","cselekszik","dicsekszik","esküszik","fekszik","gyanakszik","haragszik","igyekszik","menekszik","nyugszik","növekszik","tolakszik","törekszik","vetekszik"]),
+    // VRB-STEM-012: the sz-d verbs whose potential and converb are also built on the short stem,
+    // the `sz` stem without its `sz` (`alhat ~ aludhat`, `alva ~ aludva`, `nyughat`).
+    (role:ShortStemVerb, words:["alszik","fekszik","nyugszik"]),
+    // VRB-IMP-004: the long-vowel `t` stems whose imperative is written `ss` (`láss`, `bocsáss`).
+    (role:ImperativeSs, words:["lát","bocsát","lót"]),
+    // ORT-FOR-013, PH-G2P-004: the pre-1832 letter groups whose value holds for any family name,
+    // with the consonant they are pronounced as; `-vAl` and `-vÁ` assimilate to the sound and the
+    // spelling stays (`Kossuthtal`, `Baloghgal`, `Véghgel`).
+    (role:ArchaicNameFinal, pairs:[("th","t"),("gh","g"),("dh","d")]),
+    // PH-G2P-004: the groups whose value the table marks as ambiguous, so only a name flagged
+    // `ArchaicSpelling` reads them this way (`Babitscsal`, `Madáchcsá`, `Móriczcal`, `Rátzcal`,
+    // against `Zürichhel`).
+    (role:ArchaicNameFinalMarked, pairs:[("ts","cs"),("ch","cs"),("cz","c"),("tz","c")]),
+
+    // NOM-ADJ-004, NOM-ADJ-005: the comparatives no rule derives.
+    (role:IrregularComparative, pairs:[("jó","jobb"),("sok","több"),("kicsi","kisebb"),("kis","kisebb"),("kicsiny","kisebb"),("szép","szebb"),("nagy","nagyobb"),("könnyű","könnyebb"),("hosszú","hosszabb"),("lassú","lassabb"),("ifjú","ifjabb"),("késő","később"),("hamar","hamarabb"),("rég","régebb"),("korán","korább")]),
+    // NOM-ADJ-005: the one irregular comparative with a regular doublet (`lassabb` 60,918 ~
+    // `lassúbb` 11,354; `hosszúbb` 19, `könnyűbb` 90, `ifjúbb` 4 stay outside [WC2]).
+    (role:ComparativeDoublet, words:["lassú"]),
+    // DER-PREF-004, NOM-ADJ-006: the words `leg-` attaches to without a comparative in between.
+    (role:NonComparativeSuperlative, words:["első","utolsó","alsó","felső","hátsó","elöl","alul","felül","előre","először","utoljára","inkább","alább"]),
+    // DER-ADV-002: the adjectives whose manner adverb deletes the final vowel (`hosszan`).
+    (role:VowelDeletingAdjective, words:["könnyű","hosszú","lassú","ifjú"]),
+    // ORT-NAME-026, ORT-NAME-033: the settlement-name endings that are a possessed noun and drop
+    // their vowel before `-i` (`pannonhalmi` 33,077 : `pannonhalmai` 275 [WC2]).
+    (role:PossessivePlaceEnding, words:["falva","földe","halma","háza","telke","völgye","hida","laka","ülése","kúta","mente","vidéke","környéke","köze","melléke","alja"]),
+
+    // PND-ORD-001: the ordinals not built on a numeral stem, which yield no fraction.
+    (role:SuppletiveOrdinal, words:["első","második"]),
+    // PND-DEM-008: the demonstrative adjectives that truncate before a suffix (`ilyet`, `olyak`).
+    (role:TruncatingDemonstrative, words:["ilyen","olyan"]),
+    // PND-ORD-001: the ordinal-like words beside the numeric ordinals.
+    (role:OrdinalExtra, words:["hányadik","ahányadik","sokadik","utolsó","előbbi","utóbbi"]),
+    // PND-FRAC-001, PND-ORD-005: the fraction stems beside the numeric ones.
+    (role:FractionExtra, words:["ketted","hányad","sokad","másod"]),
+
+    // PH-G2P-013: what a symbol expands to, entered by the member that decides the suffix.
+    (role:SymbolExpansion, pairs:[("%","százalék"),("‰","ezrelék"),("§","paragrafus"),("°C","fok"),("€","euró"),("$","dollár"),("m²","négyzetméter"),("Ft","forint")]),
+    // PND-DATE-002, PND-DATE-003, PUN-DATEF-001: the calendar, written in lower case; a month's
+    // abbreviations are the written forms the date rule admits.
+    (role:Weekday, words:["hétfő","kedd","szerda","csütörtök","péntek","szombat","vasárnap"]),
+    (role:Month, words:["január","február","március","április","május","június","július","augusztus","szeptember","október","november","december"]),
+    (role:MonthAbbreviation, words:["jan.","febr.","márc.","ápr.","máj.","jún.","júl.","aug.","szept.","okt.","nov.","dec."]),
+    // ORT-NAME-030: the generics a public place name ends in, the ones AkH12 §181 names and the
+    // rest of the class; a semantic class, so it is listed.
+    (role:PublicPlace, rules:"ORT-NAME-030", words:["utca","út","tér","köz","körút","híd","lépcső","sor","sétány","fasor","rakpart","park","liget","udvar","dűlő"]),
+    // PUN-DASH-019: the words that settle a hyphen between numbers as a range.
+    (role:RangeCue, words:["o.","oldal","oldalon","oldalt","pp.","l.","utca","u.","út","úton","tér","téren","krt.","körút"]),
+    // REP-DIAC-001: the accent-free function words whose presence marks Hungarian text.
+    (role:AccentSignature, words:["es","hogy","nem","egy","meg","van","volt","az","a","is","mar","igy","utan","mint","csak","de","ha","kell","lehet","nagyon","amikor","ahol","akkor","mert","vagy"]),
+    // PND-PERS-001, PND-PERS-002: the personal pronouns, nominative and suppletive accusative.
+    (role:PronounNominative, rows:[["First","Sing","én"],["Second","Sing","te"],["Third","Sing","ő"],["First","Plur","mi"],["Second","Plur","ti"],["Third","Plur","ők"]]),
+    (role:PronounAccusative, rows:[["First","Sing","engem"],["First","Sing","engemet"],["Second","Sing","téged"],["Second","Sing","tégedet"],["Third","Sing","őt"],["First","Plur","minket"],["Second","Plur","titeket"],["Third","Plur","őket"]]),
+    // PND-PERS-003: the oblique stems of the personal pronouns, one per case.
+    (role:PronounStem, rows:[["Dat","nek"],["Ins","vel"],["Cau","ért"],["Ine","benn"],["Ela","belől"],["Ill","belé"],["Sup","rajt"],["Sbl","rá"],["Del","ról"],["Ade","nál"],["All","hozzá"],["Abl","től"]]),
+    // PND-PERS-004: the oblique forms the suffix rule does not reach.
+    (role:PronounIrregular, rows:[["Dat","Third","Sing","neki"],["Dat","Third","Plur","nekik"],["Dat","Second","Plur","nektek"]]),
+    // PND-DEM-001: the `-rA` forms of the demonstrative time and extent adverbs.
+    (role:DemonstrativeSublative, pairs:[("ekkor","ekkorra"),("akkor","akkorra"),("eddig","eddigre"),("addig","addigra")]),
+    // PND-REFL-005: the independent possessive pronouns, each with its forms (one possessed,
+    // several possessed, the short variant).
+    (role:PossessivePronoun, rows:[["enyém","enyém","enyéim"],["tiéd","tiéd","tieid","tied"],["övé","övé","övéi"],["miénk","miénk","mieink","mienk"],["tiétek","tiétek","tieitek","tietek"],["övék","övék","övéik"],["öné","öné","önéi"],["önöké","önöké","önökéi"],["magáé","magáé","magáéi"],["maguké","maguké","magukéi"],["magamé","magamé","magaméi"],["magadé","magadé","magadéi"],["magunké","magunké","magunkéi"],["magatoké","magatoké","magatokéi"]]),
+    // PND-POSTP-005, PND-PERS-004: the postpositions that take person suffixes, with their stems.
+    (role:PostpositionPersonal, rows:[["alatt","alatt"],["alá","alá"],["alól","alól"],["fölött","fölött"],["felett","felett"],["fölé","fölé"],["előtt","előtt"],["elé","elé"],["elől","elől"],["mögött","mögött"],["mögé","mögé"],["mögül","mögül"],["mellett","mellett"],["mellé","mellé"],["mellől","mellől"],["között","közt","között"],["közé","közé"],["közül","közül"],["körül","körülött"],["köré","köré"],["felé","felé"],["felől","felől"],["után","után"],["szerint","szerint"],["miatt","miatt"],["helyett","helyett"],["nélkül","nélkül"],["iránt","iránt"],["ellen","ellen"],["által","által"]]),
+    // VRB-IRR-001 .. VRB-IRR-010: the suppletive verbs, one row per verb in the column order
+    // lemma, present stem, present forms, past 3sg, past stem, bound stem, converb stem,
+    // conditional stem, imperative stem, imperative 2sg, short definite imperative 2sg,
+    // potential stem, participle stem, future participle, has a definite conjugation.
+    (role:IrregularVerb, rows:[["van","","vagyok vagy van vagyunk vagytok vannak","volt","volt","len","lé","vol","legy","légy","","le","lev","leendő","false"],["lesz","lesz","","lett","lett","len","lé","","legy","légy","","le","lev","leendő","false"],["megy","","megyek mész megy megyünk mentek mennek","ment","ment","men","men","","menj","menj","","me","men","","false"],["jön","","jövök jössz jön jövünk jöttök jönnek","jött","jött","jön","","","jöjj","jöjj","","jö","jöv","jövendő","false"],["eszik","esz","","evett","ett","en","","","egy","egyél","edd","e","ev","","true"],["iszik","isz","","ivott","itt","in","","","igy","igyál","idd","i","iv","","true"],["tesz","tesz","","tett","tett","ten","té","","tegy","tégy","tedd","te","tev","teendő","true"],["vesz","vesz","","vett","vett","ven","vé","","vegy","végy","vedd","ve","vev","veendő","true"],["visz","visz","","vitt","vitt","vin","ví","","vigy","vigy","vidd","vi","viv","","true"],["hisz","hisz","","hitt","hitt","hin","","","higgy","higgy","hidd","hi","hív","","true"]]),
+    // NOM-POSS-002, NOM-PPL-001: a lexeme whose possessive forms no rule reaches (`fiú`).
+    // NOM-STEM-014: `öcs` has no free form and lengthens before the consonant-initial suffixes,
+    // geminating before the third person; `néne` the same, with the non-archaic third person.
+    // NOM-STEM-015: `száj` uses the alternant `szá-` before the consonant-initial suffixes.
+    (role:IrregularPossessive, rows:[["fiú","fiam","fiad","fia","fiunk","fiatok","fiuk","fiai"],["öcs","öcsém","öcséd","öccse","öcsénk","öcsétek","öccsük","öcséi"],["néne","néném","nénéd","nénje","nénénk","nénétek","nénjük","nénéi"],["száj","szám","szád","szája","szánk","szátok","szájuk","szájai"]]),
+    // PND-CARD-001, PND-ORD-001: the numeral words, each as independent, attributive and ordinal;
+    // the tens by digit, the bound teen stems, the hundred and the scale words by value.
+    (role:NumeralUnit, rows:[["nulla","nulla","nulladik"],["egy","egy","egyedik"],["kettő","két","kettedik"],["három","három","harmadik"],["négy","négy","negyedik"],["öt","öt","ötödik"],["hat","hat","hatodik"],["hét","hét","hetedik"],["nyolc","nyolc","nyolcadik"],["kilenc","kilenc","kilencedik"]]),
+    (role:NumeralTen, rows:[["","",""],["tíz","tíz","tizedik"],["húsz","húsz","huszadik"],["harminc","harminc","harmincadik"],["negyven","negyven","negyvenedik"],["ötven","ötven","ötvenedik"],["hatvan","hatvan","hatvanadik"],["hetven","hetven","hetvenedik"],["nyolcvan","nyolcvan","nyolcvanadik"],["kilencven","kilencven","kilencvenedik"]]),
+    (role:NumeralBoundTen, words:["tizen","huszon"]),
+    (role:NumeralHundred, rows:[["száz","száz","századik"]]),
+    (role:NumeralScale, rows:[["1000000000000000000","trillió","trilliomodik"],["1000000000000000","billiárd","billiárdodik"],["1000000000000","billió","billiomodik"],["1000000000","milliárd","milliárdodik"],["1000000","millió","milliomodik"],["1000","ezer","ezredik"]]),
+
+    // PUN-NUMF-007, PUN-ABBR-011: the unit symbols a number is spaced from; the area and volume
+    // units take a superscript exponent.
+    (role:UnitSymbol, words:["km","m","dm","cm","mm","µm","nm","kg","g","dkg","dag","mg","t","l","dl","cl","ml","hl","h","min","s","ms","W","kW","MW","GW","kWh","MWh","V","kV","mV","A","mA","Hz","kHz","MHz","GHz","B","kB","MB","GB","TB","Pa","kPa","hPa","MPa","bar","J","kJ","MJ","cal","kcal","N","kN","K","lx","lm","dB","ha","km/h","m/s","l/100km","mAh","Ah","Ω","mol","ppm"]),
+    // PUN-NUMF-008: the currency units that follow the amount.
+    (role:CurrencyUnit, words:["Ft","HUF","EUR","USD","GBP","CHF","PLN","CZK","RON"]),
+    // ORT-ABBR-014: the derivational tails written after an acronym's hyphen like a case.
+    (role:AcronymDerivationalTail, words:["s","os","es","ös","as","beli","i","ista","izmus","ként","féle","szerű"]),
+    // PND-MEAS-002: a decimal prefix before a unit name is one word (`kilobájt`, `milliméter`).
+    (role:UnitPrefix, rules:"PND-MEAS-002", words:["kilo","mega","giga","tera","peta","hekto","deka","deci","centi","milli","mikro","nano","piko"]),
+    (role:UnitName, rules:"PND-MEAS-002", words:["méter","gramm","liter","watt","volt","amper","hertz","bájt","byte","pascal","joule","kalória","tonna","másodperc","ohm","farad","tesla","mól","kelvin","lumen","lux","newton","bar"]),
+    // PND-ART-005: the names of the letters, nouns that inflect (`az ipszilont`).
+    (role:LetterName, rules:"PND-ART-005", words:["á","bé","cé","csé","dé","dzé","dzsé","é","ef","gé","gyé","há","í","jé","ká","el","elipszilon","em","en","eny","ó","ő","pé","kú","er","es","esz","té","tyé","ú","ű","vé","iksz","ipszilon","zé","zsé"]),
+]

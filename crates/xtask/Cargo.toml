@@ -1,0 +1,24 @@
+[package]
+name = "xtask"
+version = "0.0.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+picur-morph-core.workspace = true
+picur-morph-ortho.workspace = true
+picur-morph-repair.workspace = true
+picur-morph-lint.workspace = true
+picur-morph-rank.workspace = true
+picur-morph-spell.workspace = true
+encoding_rs.workspace = true
+picur-morph-lexicon.workspace = true
+serde = { workspace = true }
+serde_json = { workspace = true }
+arrow-array = "60.1.0"
+parquet = { version = "60.1.0", default-features = false, features = ["arrow", "snap", "zstd"] }
+
+[lints]
+workspace = true

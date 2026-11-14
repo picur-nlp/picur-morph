@@ -1,0 +1,25 @@
+[package]
+name = "picur-morph-core"
+description = "Hungarian morphological generation and analysis"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+compact_str = { workspace = true }
+picur-morph-ortho.workspace = true
+picur-morph-lexicon.workspace = true
+serde.workspace = true
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+picur-morph-spell = { path = "../picur-morph-spell" }
